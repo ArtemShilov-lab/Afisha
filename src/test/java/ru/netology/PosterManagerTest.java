@@ -1,11 +1,13 @@
+
 package ru.netology;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class PosterManagerTest {
 
+    // 1. Проверяем, что пустая афиша возвращает пустой массив
     @Test
     void shouldReturnEmptyArrayIfNoMoviesAdded() {
         PosterManager manager = new PosterManager();
@@ -15,8 +17,7 @@ public class PosterManagerTest {
         assertArrayEquals(new String[0], actual);
     }
 
-    private void assertArrayEquals(String[] strings, String[] actual) {
-    }
+    // 2. Проверяем добавление одного фильма
     @Test
     void shouldAddMovie() {
         PosterManager manager = new PosterManager();
@@ -24,11 +25,12 @@ public class PosterManagerTest {
         manager.addMovie("Бладшот");
 
         String[] actual = manager.findAll();
-
         String[] expected = {"Бладшот"};
 
         assertArrayEquals(expected, actual);
     }
+
+    // 3. Проверяем добавление нескольких фильмов
     @Test
     void shouldAddSeveralMovies() {
         PosterManager manager = new PosterManager();
@@ -38,7 +40,6 @@ public class PosterManagerTest {
         manager.addMovie("Отель Белград");
 
         String[] actual = manager.findAll();
-
         String[] expected = {
                 "Бладшот",
                 "Вперёд",
@@ -47,6 +48,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    // 4. Проверяем последние 5 фильмов в обратном порядке
     @Test
     void shouldReturnLastFiveMoviesInReverseOrder() {
         PosterManager manager = new PosterManager();
@@ -59,7 +62,6 @@ public class PosterManagerTest {
         manager.addMovie("Фильм 6");
 
         String[] actual = manager.findLast();
-
         String[] expected = {
                 "Фильм 6",
                 "Фильм 5",
@@ -70,6 +72,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    // 5. Проверяем пользовательский лимит 3
     @Test
     void shouldReturnLastThreeMovies() {
         PosterManager manager = new PosterManager(3);
@@ -81,7 +85,6 @@ public class PosterManagerTest {
         manager.addMovie("Фильм 5");
 
         String[] actual = manager.findLast();
-
         String[] expected = {
                 "Фильм 5",
                 "Фильм 4",
@@ -90,6 +93,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    // 6. Проверяем, если фильмов меньше лимита
     @Test
     void shouldReturnAllMoviesIfLessThanLimit() {
         PosterManager manager = new PosterManager();
@@ -99,7 +104,6 @@ public class PosterManagerTest {
         manager.addMovie("Тролли");
 
         String[] actual = manager.findLast();
-
         String[] expected = {
                 "Тролли",
                 "Вперёд",
@@ -108,6 +112,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    // 7. Проверяем пустую афишу через findLast()
     @Test
     void shouldReturnEmptyArrayIfNoMoviesAddedToFindLast() {
         PosterManager manager = new PosterManager();
@@ -116,6 +122,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(new String[0], actual);
     }
+
+    // 8. Проверяем пользовательский лимит 7
     @Test
     void shouldReturnLastSevenMovies() {
         PosterManager manager = new PosterManager(7);
@@ -125,7 +133,6 @@ public class PosterManagerTest {
         }
 
         String[] actual = manager.findLast();
-
         String[] expected = {
                 "Фильм 10",
                 "Фильм 9",
@@ -138,6 +145,8 @@ public class PosterManagerTest {
 
         assertArrayEquals(expected, actual);
     }
+
+    // 9. Проверяем, если количество фильмов равно лимиту
     @Test
     void shouldReturnAllFiveMoviesIfCountEqualsLimit() {
         PosterManager manager = new PosterManager(5);
@@ -149,7 +158,6 @@ public class PosterManagerTest {
         manager.addMovie("Фильм 5");
 
         String[] actual = manager.findLast();
-
         String[] expected = {
                 "Фильм 5",
                 "Фильм 4",
